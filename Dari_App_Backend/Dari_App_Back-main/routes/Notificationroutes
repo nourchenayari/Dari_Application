@@ -1,0 +1,14 @@
+const express = require('express');
+const router = express.Router();
+const Notif = require('../controllers/NotificationControllers');
+const auth = require('../middleware/auth'); 
+
+router.get('/', auth, Notif.getNotifications);
+
+router.delete('/:notificationId', auth, Notif.deleteNotification);
+
+router.put('/read/:notificationId', auth, Notif.markNotificationAsRead);
+
+router.put('/ignore/:notificationId', auth, Notif.ignoreNotification);
+
+module.exports = router;

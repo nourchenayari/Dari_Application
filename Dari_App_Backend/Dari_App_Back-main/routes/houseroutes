@@ -1,0 +1,18 @@
+const express = require('express');
+const router = express.Router();
+const houseController = require('../controllers/houseControllers');
+const auth = require('../middleware/auth'); 
+const { verifyAdmin }  = require('../middleware/auth');
+router.post('/add', auth, houseController.addHouse);
+router.get('/user', auth, houseController.getAllHousesByUser);  
+router.get('/getall', houseController.getAllHouses);
+router.get('/:id', houseController.getHouseById);
+router.put('/:id', auth, houseController.updateHouse); 
+router.delete('/:id', auth, houseController.deleteHouse); 
+router.post('/searchHouses', houseController.searchHouses);
+/*router.get('/', houseController.getHousePen);
+router.put('/house/:id/approve', auth,  verifyAdmin, houseController.approveHouse);
+router.put('/house/:id/reject', auth,  verifyAdmin, houseController.rejectHouse);*/
+
+  
+module.exports = router;

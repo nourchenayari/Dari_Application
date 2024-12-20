@@ -1,0 +1,19 @@
+const express = require('express');
+const router = express.Router();
+const reservationController = require('../controllers/reservationControllers');
+const auth = require('../middleware/auth'); 
+
+// Route pour effectuer une réservation
+router.post('/houses/:houseId/reservations', auth, reservationController.createReservation);
+// Route pour obtenir toutes les réservations de l'utilisateur
+router.get('/reservations', auth, reservationController.getUserReservations);
+
+// Route pour obtenir les réservations pour une maison spécifique
+router.get('/houses/:houseId/reservations', auth, reservationController.getHouseReservations);
+
+// Route pour annuler une réservation
+router.delete('/reservations/:id', auth, reservationController.cancelReservation);
+
+router.put('/reservations/:id', auth, reservationController.updateReservation);
+
+module.exports = router;
